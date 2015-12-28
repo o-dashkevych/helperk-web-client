@@ -39,6 +39,8 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -47,14 +49,15 @@
                                         <td>${user.name}</td>
                                         <td>${user.email}</td>
                                         <td>${user.role.name}</td>
-                                    </tr>
-                                    <tr>
+                                        <c:if test="${user.role.name ne 'ADMIN'}">
+                                            <td>
+                                                <button type="submit" class="btn btn-default">Remove</button>
+                                            </td>
+                                        </c:if>
                                         <td>
                                             <button type="submit" class="btn btn-default">Edit</button>
                                         </td>
-                                        <td>
-                                            <button type="submit" class="btn btn-default">Remove</button>
-                                        </td>
+
                                     </tr>
                                 </c:forEach>
 

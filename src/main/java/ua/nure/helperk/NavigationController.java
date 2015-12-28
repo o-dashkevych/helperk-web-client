@@ -35,22 +35,22 @@ public class NavigationController {
 
 	@RequestMapping("/charts")
 	public String goChartsPage(ModelMap model) {
-		return "charts";
+		return "unused/charts";
 	}
 
 	@RequestMapping("/device")
 	public String goDevicePage(ModelMap model) {
-		return "devices";
+		return "unused/devices";
 	}
 
 	@RequestMapping("/device/edit")
 	public String goEditDevicePage(ModelMap model) {
-		return "edit_device";
+		return "unused/edit_device";
 	}
 
 	@RequestMapping("/outlet/add")
 	public String goAddOutletPage(ModelMap model) {
-		return "add_outlet";
+		return "unused/add_outlet";
 	}
 
 }

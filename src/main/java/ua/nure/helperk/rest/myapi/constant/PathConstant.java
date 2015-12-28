@@ -48,4 +48,11 @@ public class PathConstant {
 	public static final String USER_ROLE = SERVER + "/user_role/";
 
 	public static final String GET_ROLE = USER_ROLE + "get?" + USER_EMAIL;
+
+	/* ADVERT CONTROLLER */
+
+	public static final String ADVERT = SERVER + "/advert/";
+
+	public static final String ALL_ADVERTS = ADVERT + "all";
+
 }

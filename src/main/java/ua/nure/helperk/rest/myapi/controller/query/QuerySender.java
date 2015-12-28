@@ -1,7 +1,7 @@
 package ua.nure.helperk.rest.myapi.controller.query;
 
 /**
- * Created by helperk on 11/28/2015.
+ * @author Oleg Dashkevych.
  */
 public abstract class QuerySender {
 

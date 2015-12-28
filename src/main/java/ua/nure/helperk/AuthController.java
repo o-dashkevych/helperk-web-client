@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ua.nure.helperk.rest.myapi.RestServer;
 import ua.nure.helperk.rest.myapi.constant.Roles;
 import ua.nure.helperk.rest.myapi.controller.UserAccountController;
+import ua.nure.helperk.rest.myapi.entity.Advert;
 import ua.nure.helperk.rest.myapi.entity.User;
 import ua.nure.helperk.rest.myapi.entity.UserRole;
 import ua.nure.helperk.rest.myapi.impl.DefaultRestServer;
+
+import java.util.List;
 
 /**
  * @author Oleg Dashkevych.
@@ -35,6 +38,8 @@ public class AuthController {
 			if(role.getName().equals(Roles.ADMIN.name())) {
 				return "admin_page";
 			}else {
+				List<Advert> adverts = restServer.getAdvertController().getAll();
+				model.addAttribute("adverts", adverts);
 				return "user_page";
 			}
 		}
