@@ -6,7 +6,7 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import ua.nure.helperk.rest.myapi.entity.Advert;
+import ua.nure.helperk.rest.myapi.entity.AdvertType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +14,32 @@ import java.util.List;
 /**
  * @author Oleg Dashkevych.
  */
-public class AdvertQuerySender extends QuerySender {
+public class AdvertTypeQuerySender extends QuerySender {
 
-	public List<Advert> executeAllAdverts(String... params) {
-		final List<Advert> adverts;
+	public AdvertType executeAdvertType(String... params) {
+		AdvertType advertType;
+		try {
+			String url = params[0];
+
+			DefaultHttpClient httpClient = new DefaultHttpClient();
+			ResponseHandler<String> res = new BasicResponseHandler();
+
+			HttpGet get = new HttpGet(url);
+
+			String response = httpClient.execute(get, res);
+			JSONObject result = new JSONObject(response);
+			advertType = new AdvertType(result);
+
+		} catch (Throwable t) {
+			advertType = new AdvertType();
+			advertType.setId(-1L);
+			throwable = t;
+		}
+		return advertType;
+	}
+
+	public List<AdvertType> executeAllAdvertTypes(String... params) {
+		final List<AdvertType> advertTypes;
 		try {
 			String url = params[0];
 
@@ -28,32 +50,13 @@ public class AdvertQuerySender extends QuerySender {
 
 			String response = httpClient.execute(get, res);
 			JSONArray result = new JSONArray(response);
-			adverts = new ArrayList<>(result.length());
-			result.forEach(o -> adverts.add(new Advert((JSONObject) o)));
+			advertTypes = new ArrayList<>(result.length());
+			result.forEach(o -> advertTypes.add(new AdvertType((JSONObject) o)));
 		} catch (Throwable t) {
 			throwable = t;
 			return new ArrayList<>(0);
 		}
-		return adverts;
-	}
-
-
-	public Advert executeAdvert(String... params) {
-		Advert advert;
-		try {
-			String url = params[0];
-			DefaultHttpClient httpClient = new DefaultHttpClient();
-			ResponseHandler<String> res = new BasicResponseHandler();
-			HttpGet get = new HttpGet(url);
-			String response = httpClient.execute(get, res);
-			JSONObject result = new JSONObject(response);
-			advert = new Advert(result);
-		} catch (Throwable t) {
-			advert = new Advert();
-			advert.setId(-1L);
-			throwable = t;
-		}
-		return advert;
+		return advertTypes;
 	}
 
 }

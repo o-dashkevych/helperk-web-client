@@ -9,7 +9,7 @@
     <meta name="description" content="Helperk home page">
     <meta name="author" content="Oleg Dashkevych">
 
-    <title>Helperk - help with enjoy!</title>
+    <title>Helperk - login!</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">

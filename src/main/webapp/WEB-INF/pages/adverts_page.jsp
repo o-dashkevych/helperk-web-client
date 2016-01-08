@@ -2,113 +2,70 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <%-- Header admin declaration --%>
+    <title>Adverts</title>
     <%@ include file="fragment/header.jspf" %>
 </head>
 <body>
 <!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Start Bootstrap</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
-
+<%@ include file="fragment/header_user.jspf" %>
 <!-- Page Content -->
 <div class="container">
-
     <div class="row">
-
-        <div class="col-md-3">
-            <p class="lead">Shop Name</p>
-            <div class="list-group">
-                <a href="#" class="list-group-item">Category 1</a>
-                <a href="#" class="list-group-item">Category 2</a>
-                <a href="#" class="list-group-item">Category 3</a>
-            </div>
-        </div>
-
+        <%@ include file="fragment/adverts_menu.jspf" %>
         <div class="col-md-9">
+            <%--
+                        <div class="row carousel-holder">
 
-            <div class="row carousel-holder">
+                            <div class="col-md-12">
+                                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="item active">
+                                            <img class="slide-image" src="<c:out value="${adverts[0].image}" />" alt="">
+                                        </div>
+                                        <div class="item">
+                                            <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                        </div>
+                                        <div class="item">
+                                            <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                        </div>
+                                    </div>
+                                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                    </a>
+                                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                    </a>
+                                </div>
+                            </div>
 
-                <div class="col-md-12">
-                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                            </div>
                         </div>
-                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                        </a>
-                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-
+                      --%>
             <div class="row">
                 <c:forEach items="${adverts}" var="advert">
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
                                 <h4 class="pull-right">$ ${advert.price}</h4>
-                                <h4><a href="#">${advert.titleName}</a>
+                                <h4><a href="/advert/view?id=${advert.id}">${advert.titleName}</a>
                                 </h4>
                                 <p>${advert.description}</p>
                             </div>
-                                <%--<div class="ratings">--%>
-                                <%--<p class="pull-right">15 reviews</p>--%>
-                                <%--<p>--%>
-                                <%--<span class="glyphicon glyphicon-star"></span>--%>
-                                <%--<span class="glyphicon glyphicon-star"></span>--%>
-                                <%--<span class="glyphicon glyphicon-star"></span>--%>
-                                <%--<span class="glyphicon glyphicon-star"></span>--%>
-                                <%--<span class="glyphicon glyphicon-star"></span>--%>
-                                <%--</p>--%>
-                                <%--</div>--%>
+                                <%--<div class="ratings">
+                                <p class="pull-right">15 reviews</p>
+                                <p>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                </p>
+                                </div>--%>
                         </div>
                     </div>
                 </c:forEach>
@@ -205,14 +162,10 @@
                 --%>
 
                 <div class="col-sm-4 col-lg-4 col-md-4">
-                    <h4><a href="#">Like this template?</a>
+                    <h4><a href="#">Want to add advert?</a>
                     </h4>
-                    <p>If you like this template, then check out <a target="_blank"
-                                                                    href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this
-                        tutorial</a> on how to build a working review system for your online store!</p>
-                    <a class="btn btn-primary" target="_blank"
-                       href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View
-                        Tutorial</a>
+                    <p>If you want ot add advert press Add Advert at the top panel.</p>
+
                 </div>
 
             </div>
@@ -232,7 +185,7 @@
     <footer>
         <div class="row">
             <div class="col-lg-12">
-                <p>Copyright &copy; Your Website 2014</p>
+                <p>Copyright &copy; Helperk 2015</p>
             </div>
         </div>
     </footer>
@@ -241,10 +194,10 @@
 <!-- /.container -->
 
 <!-- jQuery -->
-<script src="js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/resources/dist/js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/dist/js/bootstrap.min.js"></script>
 
 </body>
 </html>

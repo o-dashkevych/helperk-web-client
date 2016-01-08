@@ -27,11 +27,13 @@ public class Advert {
 
 	private AdvertType type;
 
+	private String image;
+
 	public Advert() {
 	}
 
-	public Advert(Long id, String titleName, String description, Timestamp startDate,
-				  Timestamp endDate, Double price, User creator, User executor, AdvertType type) {
+	public Advert(Long id, String titleName, String description, Timestamp startDate, Timestamp endDate,
+				  Double price, User creator, User executor, AdvertType type, String image) {
 		this.id = id;
 		this.titleName = titleName;
 		this.description = description;
@@ -41,18 +43,26 @@ public class Advert {
 		this.creator = creator;
 		this.executor = executor;
 		this.type = type;
+		this.image = image;
 	}
 
+	//TODO end date
 	public Advert(JSONObject jsonObject) {
 		this.id = jsonObject.getLong("id");
 		this.titleName = jsonObject.getString("titleName");
 		this.description = jsonObject.getString("description");
 		this.startDate = new Timestamp(jsonObject.getLong("startDate"));
-		this.endDate = new Timestamp(jsonObject.getLong("endDate"));
+//		this.endDate = new Timestamp(jsonObject.getLong("endDate"));
 		this.price = jsonObject.getDouble("price");
 		this.creator = new User((JSONObject) jsonObject.get("creator"));
-		this.executor = new User((JSONObject) jsonObject.get("executor"));
+//		this.executor = new User((JSONObject) jsonObject.get("executor"));
 		this.type = new AdvertType((JSONObject) jsonObject.get("type"));
+//		String getBackEncodedString = jsonObject.getString("image");
+//		if(getBackEncodedString == null){
+//			image = null;
+//		}else {
+//			image = new String(org.apache.commons.codec.binary.Base64.decodeBase64(getBackEncodedString));
+//		}
 	}
 
 	public Long getId() {
@@ -101,5 +111,37 @@ public class Advert {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public User getCreator() {
+		return creator;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+
+	public User getExecutor() {
+		return executor;
+	}
+
+	public void setExecutor(User executor) {
+		this.executor = executor;
+	}
+
+	public AdvertType getType() {
+		return type;
+	}
+
+	public void setType(AdvertType type) {
+		this.type = type;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 }

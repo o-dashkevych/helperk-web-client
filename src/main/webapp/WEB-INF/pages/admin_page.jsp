@@ -4,6 +4,7 @@
 
 <head>
 
+    <title>Admin page</title>
     <%-- Header admin declaration --%>
     <%@ include file="fragment/header.jspf" %>
 
@@ -12,7 +13,7 @@
 <div id="wrapper">
 
     <%-- Menu Bar navigation --%>
-    <%@ include file="fragment/side_menu.jspf" %>
+    <%@ include file="fragment/header_admin.jspf" %>
 
     <div id="page-wrapper">
         <div class="row">

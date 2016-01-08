@@ -31,10 +31,10 @@ public class DefaultUserAccountController implements UserAccountController {
 		return Boolean.valueOf(result);
 	}
 
-	@Override
-	public boolean isUserExistByEmail(String email) {
-		return false;
-	}
+//	@Override
+//	public boolean isUserExistByEmail(String email) {
+//		return false;
+//	}
 
 	@Override
 	public boolean registerNewUser(User user) {
@@ -45,7 +45,6 @@ public class DefaultUserAccountController implements UserAccountController {
 		System.out.println("query: " + query);
 		User resultUser = querySender.executeUser(query);
 		return resultUser.getId() > -1;
-
 	}
 
 	@Override
@@ -63,8 +62,18 @@ public class DefaultUserAccountController implements UserAccountController {
 		String query = PathConstant.ALL_USERS;
 		LOGGER.info("query: " + query);
 		System.out.println("query: " + query);
-		List<User> users = (List<User>) querySender.executeAllUsers(query);
+		List<User> users = querySender.executeAllUsers(query);
 		System.out.println("All users size: " + users.size());
 		return users;
+	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		String query = PathConstant.GETUSER + email;
+		LOGGER.info("query: " + query);
+		System.out.println("query: " + query);
+		User user = querySender.executeUser(query);
+		System.out.println("user -> " + user.getName());
+		return user;
 	}
 }

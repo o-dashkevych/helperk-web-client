@@ -21,17 +21,12 @@ public class UserQuerySender extends QuerySender {
 		User user;
 		try {
 			String url = params[0];
-
 			DefaultHttpClient httpClient = new DefaultHttpClient();
 			ResponseHandler<String> res = new BasicResponseHandler();
-
 			HttpGet get = new HttpGet(url);
-
 			String response = httpClient.execute(get, res);
 			JSONObject result = new JSONObject(response);
-
 			user = new User(result);
-
 		} catch (Throwable t) {
 			user = new User();
 			user.setId(-1L);
@@ -45,17 +40,12 @@ public class UserQuerySender extends QuerySender {
 
 		try {
 			String url = params[0];
-
 			DefaultHttpClient httpClient = new DefaultHttpClient();
 			ResponseHandler<String> res = new BasicResponseHandler();
-
 			HttpGet get = new HttpGet(url);
-
             /* Calling REST server */
 			String response = httpClient.execute(get, res);
-
 			result = response;
-
 		} catch (Throwable t) {
 			throwable = t;
 		}
@@ -70,14 +60,10 @@ public class UserQuerySender extends QuerySender {
 
 			DefaultHttpClient httpClient = new DefaultHttpClient();
 			ResponseHandler<String> res = new BasicResponseHandler();
-
 			HttpGet get = new HttpGet(url);
-
 			String response = httpClient.execute(get, res);
 			JSONObject result = new JSONObject(response);
-
 			userRole = new UserRole(result);
-
 		} catch (Throwable t) {
 			userRole = new UserRole();
 			userRole.setId(-1L);
@@ -90,12 +76,9 @@ public class UserQuerySender extends QuerySender {
 		final List<User> users;
 		try {
 			String url = params[0];
-
 			DefaultHttpClient httpClient = new DefaultHttpClient();
 			ResponseHandler<String> res = new BasicResponseHandler();
-
 			HttpGet get = new HttpGet(url);
-
 			String response = httpClient.execute(get, res);
 			JSONArray result = new JSONArray(response);
 			users = new ArrayList<>(result.length());

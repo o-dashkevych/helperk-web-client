@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/admin")
-public class NavigationController {
+public class AdminController {
 	private final RestServer restServer = new DefaultRestServer();
 
 	UserAccountController userAccountController = restServer.getUserController();
@@ -30,7 +30,7 @@ public class NavigationController {
 	public String goUsersPage(ModelMap model) {
 		List<User> users = userAccountController.getAll();
 		model.addAttribute("users", users);
-		return "users_page";
+		return "admin_users_page";
 	}
 
 	@RequestMapping("/charts")

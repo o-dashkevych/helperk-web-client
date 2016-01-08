@@ -12,11 +12,13 @@ public interface UserAccountController {
 
 	boolean loginUser(User user);
 
-	boolean isUserExistByEmail(String email);
+//	boolean isUserExistByEmail(String email);
 
 	boolean registerNewUser(User user);
 
 	UserRole getRoleByEmail(String email);
 
 	List<User> getAll();
+
+	User getUserByEmail(String email);
 }

@@ -1,7 +1,7 @@
 package ua.nure.helperk.rest.myapi.constant;
 
 /**
- * Created by helperk on 12/20/2015.
+ * @author Oleg Dashkevych.
  */
 public class PathConstant {
 
@@ -49,10 +49,50 @@ public class PathConstant {
 
 	public static final String GET_ROLE = USER_ROLE + "get?" + USER_EMAIL;
 
+	/* ADVERT */
+
+	public static final String ADVERT_ID = "id=";
+
+	public static final String ADVERT_CREATOR = "creator=";
+
+	public static final String ADVERT_EXECUTOR = "executor=";
+
+	public static final String ADVERT_TITLE = "title=";
+
+	public static final String ADVERT_DESC = "description=";
+
+	public static final String ADVERT_START_DATE = "startDate=";
+
+	public static final String ADVERT_END_DATE = "endDate=";
+
+	public static final String ADVERT_PRICE = "price=";
+
+	public static final String ADVERT_ADVERT_TYPE = "type=";
+
 	/* ADVERT CONTROLLER */
 
 	public static final String ADVERT = SERVER + "/advert/";
 
 	public static final String ALL_ADVERTS = ADVERT + "all";
+
+	public static final String ADD_ADVERT = ADVERT + "add?";
+
+	public static final String UPDATE_ADVERT = ADVERT + "update?";
+
+	public static final String EXEC_ADVERT = ADVERT + "execute?";
+
+	public static final String GET_ADVERT_BY_ID = ADVERT + "get?";
+
+	/* ADVERT TYPE */
+
+	public static final String ADVERT_TYPE_NAME = "name=";
+
+	/* ADVERT TYPE CONTROLLER */
+
+	public static final String ADVERT_TYPE = SERVER + "/advert_type/";
+
+	public static final String GET_ADVERTS_TYPE = ADVERT_TYPE + "get?";
+
+	public static final String ALL_ADVERT_TYPES = ADVERT_TYPE + "all";
 
 }

@@ -7,11 +7,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.nure.helperk.rest.myapi.RestServer;
 import ua.nure.helperk.rest.myapi.controller.UserAccountController;
+import ua.nure.helperk.rest.myapi.entity.Advert;
 import ua.nure.helperk.rest.myapi.entity.User;
 import ua.nure.helperk.rest.myapi.impl.DefaultRestServer;
 
+import java.util.List;
+
 /**
- * Created by helperk on 12/20/2015.
+ * @author Oleg Dashkevych.
  */
 @Controller
 @RequestMapping("/register")
@@ -30,7 +33,9 @@ public class RegistrationController {
 		user.setName(name);
 		model.addAttribute("user", user);
 		if (userAccountController.registerNewUser(user)) {
-			return "redirect:/admin/";
+			List<Advert> adverts = restServer.getAdvertController().getAll();
+			model.addAttribute("adverts", adverts);
+			return "adverts_page";
 		}
 		model.addAttribute("error", "Sorry, user with this email/pass is already exist");
 		return "register";
