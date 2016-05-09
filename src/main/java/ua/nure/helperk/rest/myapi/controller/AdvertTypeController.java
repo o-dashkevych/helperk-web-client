@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface AdvertTypeController {
 
-	AdvertType getAdvertTypeByName(String name);
+    AdvertType getAdvertTypeByName(String name);
 
-	List<AdvertType> getAll();
+    List<AdvertType> getAll();
 }

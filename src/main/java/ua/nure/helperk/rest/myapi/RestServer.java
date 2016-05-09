@@ -4,14 +4,11 @@ import ua.nure.helperk.rest.myapi.controller.AdvertController;
 import ua.nure.helperk.rest.myapi.controller.AdvertTypeController;
 import ua.nure.helperk.rest.myapi.controller.UserAccountController;
 
-/**
- * Created by helperk on 12/20/2015.
- */
 public interface RestServer {
 
-	UserAccountController getUserController();
+    UserAccountController getUserController();
 
-	AdvertController getAdvertController();
+    AdvertController getAdvertController();
 
-	AdvertTypeController getAdvertTypeController();
+    AdvertTypeController getAdvertTypeController();
 }

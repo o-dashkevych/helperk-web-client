@@ -10,11 +10,11 @@ import java.util.List;
  */
 public interface AdvertController {
 
-	List<Advert> getAll();
+    List<Advert> getAll();
 
-	Advert getById(String id);
+    Advert getById(String id);
 
-	boolean addAdvert(Advert advert);
+    boolean addAdvert(Advert advert);
 
-	boolean execAdvert(Advert advert, User user);
+    boolean execAdvert(Advert advert, User user);
 }

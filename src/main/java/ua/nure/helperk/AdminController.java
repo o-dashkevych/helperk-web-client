@@ -17,40 +17,19 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	private final RestServer restServer = new DefaultRestServer();
+    private final RestServer restServer = new DefaultRestServer();
 
-	UserAccountController userAccountController = restServer.getUserController();
+    private final UserAccountController userAccountController = restServer.getUserController();
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String goAdmin(ModelMap model) {
-		return "admin_page";
-	}
+    @RequestMapping(method = RequestMethod.GET)
+    public String goAdmin(ModelMap model) {
+        return "admin_page";
+    }
 
-	@RequestMapping("/users")
-	public String goUsersPage(ModelMap model) {
-		List<User> users = userAccountController.getAll();
-		model.addAttribute("users", users);
-		return "admin_users_page";
-	}
-
-	@RequestMapping("/charts")
-	public String goChartsPage(ModelMap model) {
-		return "unused/charts";
-	}
-
-	@RequestMapping("/device")
-	public String goDevicePage(ModelMap model) {
-		return "unused/devices";
-	}
-
-	@RequestMapping("/device/edit")
-	public String goEditDevicePage(ModelMap model) {
-		return "unused/edit_device";
-	}
-
-	@RequestMapping("/outlet/add")
-	public String goAddOutletPage(ModelMap model) {
-		return "unused/add_outlet";
-	}
-
+    @RequestMapping("/users")
+    public String goUsersPage(ModelMap model) {
+        List<User> users = userAccountController.getAll();
+        model.addAttribute("users", users);
+        return "admin_users_page";
+    }
 }

@@ -10,15 +10,15 @@ import java.util.List;
  */
 public interface UserAccountController {
 
-	boolean loginUser(User user);
+    boolean loginUser(User user);
 
 //	boolean isUserExistByEmail(String email);
 
-	boolean registerNewUser(User user);
+    boolean registerNewUser(User user);
 
-	UserRole getRoleByEmail(String email);
+    UserRole getRoleByEmail(String email);
 
-	List<User> getAll();
+    List<User> getAll();
 
-	User getUserByEmail(String email);
+    User getUserByEmail(String email);
 }

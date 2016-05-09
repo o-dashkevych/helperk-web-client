@@ -13,18 +13,18 @@ import ua.nure.helperk.rest.myapi.controller.impl.DefaultUserAccountController;
  */
 public class DefaultRestServer implements RestServer {
 
-	@Override
-	public UserAccountController getUserController() {
-		return new DefaultUserAccountController();
-	}
+    @Override
+    public UserAccountController getUserController() {
+        return new DefaultUserAccountController();
+    }
 
-	@Override
-	public AdvertController getAdvertController() {
-		return new DefaultAdvertController();
-	}
+    @Override
+    public AdvertController getAdvertController() {
+        return new DefaultAdvertController();
+    }
 
-	@Override
-	public AdvertTypeController getAdvertTypeController() {
-		return new DefaultAdvertTypeController();
-	}
+    @Override
+    public AdvertTypeController getAdvertTypeController() {
+        return new DefaultAdvertTypeController();
+    }
 }

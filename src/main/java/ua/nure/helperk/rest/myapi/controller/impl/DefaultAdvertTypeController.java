@@ -14,28 +14,24 @@ import java.util.List;
 public class DefaultAdvertTypeController implements AdvertTypeController {
 
 
-	private static final Logger LOGGER = Logger.getLogger(DefaultUserAccountController.class);
+    private static final Logger LOGGER = Logger.getLogger(DefaultUserAccountController.class);
 
-	AdvertTypeQuerySender querySender = new AdvertTypeQuerySender();
+    AdvertTypeQuerySender querySender = new AdvertTypeQuerySender();
 
+    @Override
+    public AdvertType getAdvertTypeByName(String name) {
+        String query = PathConstant.GET_ADVERTS_TYPE + PathConstant.ADVERT_TYPE_NAME + name;
+        LOGGER.info("query: " + query);
+        AdvertType advertType = querySender.executeAdvertType(query);
+        return (advertType.getId() != -1) ? advertType : null;
+    }
 
-	@Override
-	public AdvertType getAdvertTypeByName(String name) {
-
-		String query = PathConstant.GET_ADVERTS_TYPE + PathConstant.ADVERT_TYPE_NAME + name;
-		LOGGER.info("query: " + query);
-		System.out.println("query: " + query);
-		AdvertType advertType = querySender.executeAdvertType(query);
-		return (advertType.getId() != -1) ? advertType : null;
-	}
-
-	@Override
-	public List<AdvertType> getAll() {
-		String query = PathConstant.ALL_ADVERT_TYPES;
-		LOGGER.info("query: " + query);
-		System.out.println("query: " + query);
-		List<AdvertType> advertTypes = querySender.executeAllAdvertTypes(query);
-		System.out.println("All advertTypes size: " + advertTypes.size());
-		return advertTypes;
-	}
+    @Override
+    public List<AdvertType> getAll() {
+        String query = PathConstant.ALL_ADVERT_TYPES;
+        LOGGER.info("query: " + query);
+        List<AdvertType> advertTypes = querySender.executeAllAdvertTypes(query);
+        System.out.println("All advertTypes size: " + advertTypes.size());
+        return advertTypes;
+    }
 }

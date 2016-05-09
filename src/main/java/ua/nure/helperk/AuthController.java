@@ -25,48 +25,66 @@ import java.util.List;
 @RequestMapping("/login")
 public class AuthController {
 
-	private final RestServer restServer = new DefaultRestServer();
+    private final RestServer restServer = new DefaultRestServer();
 
-	private final AdvertTypeController advertTypeController = restServer.getAdvertTypeController();
+    private final AdvertTypeController advertTypeController = restServer.getAdvertTypeController();
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String loginUser(ModelMap model, @RequestParam(value = "email") String email,
-							@RequestParam(value = "password") String password, HttpServletRequest request) {
-		UserAccountController userAccountController = restServer.getUserController();
-		User user = new User();
-		user.setEmail(email);
-		user.setPassword(password);
-		if (userAccountController.loginUser(user)) {
-			user = userAccountController.getUserByEmail(email);
-			request.getSession().setAttribute("user", user);
-			UserRole role = userAccountController.getRoleByEmail(user.getEmail());
-			if (role.getName().equals(Roles.ADMIN.name())) {
-				return "admin_page";
-			} else {
-				List<Advert> adverts = restServer.getAdvertController().getAll();
-				List<AdvertType> advertTypes = advertTypeController.getAll();
-				model.addAttribute("advertTypes", advertTypes);
-				model.addAttribute("adverts", adverts);
-				/*try {
-					for (Advert advert : adverts) {
-						if (advert.getImage() == null) {
-							advert.setImage(new String(Files.readAllBytes(Paths.get("/src/main/webapp/resources/img/logo-no.jpg")));
-						}
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}*/
+    private User user;
 
-				return "adverts_page";
-			}
-		}
-		model.addAttribute("error", "Sorry, user with this email/pass does not exist");
-		return "login";
-	}
+    private String page;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String loginAccount(ModelMap model) {
-		model.addAttribute("user", new User());
-		return "login";
-	}
+    private ModelMap model;
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String loginUser(ModelMap model, @RequestParam(value = "email") String email,
+                            @RequestParam(value = "password") String password, HttpServletRequest request) {
+        this.model = model;
+        page = "login";
+        buildUser(email, password);
+        if (!isExist(request)) {
+            model.addAttribute("error", "Sorry, user with this email/pass does not exist");
+        }
+        return page;
+    }
+
+    private boolean isExist(HttpServletRequest request) {
+        UserAccountController userAccountController = restServer.getUserController();
+        if (userAccountController.loginUser(user)) {
+            user = userAccountController.getUserByEmail(user.getEmail());
+            request.getSession().setAttribute("user", user);
+            setLoggedUserProperties();
+            return true;
+        }
+        return false;
+    }
+
+    private void setLoggedUserProperties() {
+        UserRole role = user.getRole();
+        if (role.getName().equals(Roles.ADMIN.name())) {
+            setAdminProperties();
+        } else setDefaultUserProperties();
+    }
+
+    private void setDefaultUserProperties() {
+        List<Advert> adverts = restServer.getAdvertController().getAll();
+        List<AdvertType> advertTypes = advertTypeController.getAll();
+        model.addAttribute("advertTypes", advertTypes);
+        model.addAttribute("adverts", adverts);
+        page = "adverts_page";
+    }
+
+    private void setAdminProperties() {
+        page = "admin_page";
+    }
+
+    private void buildUser(String email, String password) {
+        user.setEmail(email);
+        user.setPassword(password);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String loginAccount(ModelMap model) {
+        model.addAttribute("user", new User());
+        return "login";
+    }
 }

@@ -11,6 +11,7 @@
         <spring.version>4.1.1.RELEASE</spring.version>
     </properties>
 
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -109,6 +110,13 @@
             <type>jar</type>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.8</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -129,6 +137,21 @@
                     </includes>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <path>/</path>
+                    <contextFile>src/main/webapp/WEB-INF/web.xml</contextFile>
+                    <mode>context</mode>
+                    <charset>UTF-8</charset>
+                    <port>8080</port>
+                    <warDirectory>target/${project.artifactId}</warDirectory>
+                </configuration>
+            </plugin>
         </plugins>
+
     </build>
 </project>

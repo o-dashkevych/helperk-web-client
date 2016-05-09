@@ -14,66 +14,64 @@ import java.util.List;
  */
 public class DefaultUserAccountController implements UserAccountController {
 
-	private static final Logger LOGGER = Logger.getLogger(DefaultUserAccountController.class);
+    private static final Logger LOGGER = Logger.getLogger(DefaultUserAccountController.class);
 
-	UserQuerySender querySender = new UserQuerySender();
+    private final UserQuerySender querySender = new UserQuerySender();
 
-	@Override
-	public boolean loginUser(User user) {
+    @Override
+    public boolean loginUser(User user) {
+        String query = buildLoginUserQuery(user);
+        LOGGER.info("query: " + query);
+        String result = querySender.executeAuthentication(query).toString();
+        LOGGER.info("result " + result);
+        return Boolean.valueOf(result);
+    }
 
-		String query = PathConstant.AUTH + PathConstant.USER_EMAIL
-				+ user.getEmail() + PathConstant.AMPERSAND + PathConstant.USER_PASS
-				+ user.getPassword();
-		LOGGER.info("query: " + query);
-		System.out.println("query: " + query);
-		String result = querySender.executeAuthen(query).toString();
-		System.out.println("result " + result);
-		return Boolean.valueOf(result);
-	}
+    private String buildLoginUserQuery(User user) {
+        return PathConstant.AUTH + PathConstant.USER_EMAIL
+                + user.getEmail() + PathConstant.AMPERSAND + PathConstant.USER_PASS
+                + user.getPassword();
+    }
 
-//	@Override
-//	public boolean isUserExistByEmail(String email) {
-//		return false;
-//	}
+    @Override
+    public boolean registerNewUser(User user) {
+        String query = buildRegisterUserQuery(user);
+        LOGGER.info("query: " + query);
+        System.out.println("query: " + query);
+        User resultUser = querySender.executeUser(query);
+        return resultUser.getId() > -1;
+    }
 
-	@Override
-	public boolean registerNewUser(User user) {
-		String query = PathConstant.ADD_USER + PathConstant.USER_EMAIL
-				+ user.getEmail() + PathConstant.AMPERSAND + PathConstant.USER_PASS
-				+ user.getPassword() + PathConstant.AMPERSAND + PathConstant.USER_NAME + user.getName();
-		LOGGER.info("query: " + query);
-		System.out.println("query: " + query);
-		User resultUser = querySender.executeUser(query);
-		return resultUser.getId() > -1;
-	}
 
-	@Override
-	public UserRole getRoleByEmail(String email) {
+    private String buildRegisterUserQuery(User user) {
+        return PathConstant.ADD_USER + PathConstant.USER_EMAIL
+                + user.getEmail() + PathConstant.AMPERSAND + PathConstant.USER_PASS
+                + user.getPassword() + PathConstant.AMPERSAND + PathConstant.USER_NAME + user.getName();
+    }
 
-		String query = PathConstant.GET_ROLE + email;
-		LOGGER.info("query: " + query);
-		System.out.println("query: " + query);
-		UserRole role = querySender.executeRole(query);
-		return (role.getId() != -1) ? role : null;
-	}
+    @Override
+    public UserRole getRoleByEmail(String email) {
+        String query = PathConstant.GET_ROLE + email;
+        LOGGER.info("query: " + query);
+        UserRole role = querySender.executeRole(query);
+        return (role.getId() != -1) ? role : null;
+    }
 
-	@Override
-	public List<User> getAll() {
-		String query = PathConstant.ALL_USERS;
-		LOGGER.info("query: " + query);
-		System.out.println("query: " + query);
-		List<User> users = querySender.executeAllUsers(query);
-		System.out.println("All users size: " + users.size());
-		return users;
-	}
+    @Override
+    public List<User> getAll() {
+        String query = PathConstant.ALL_USERS;
+        LOGGER.info("query: " + query);
+        List<User> users = querySender.executeAllUsers(query);
+        System.out.println("All users size: " + users.size());
+        return users;
+    }
 
-	@Override
-	public User getUserByEmail(String email) {
-		String query = PathConstant.GETUSER + email;
-		LOGGER.info("query: " + query);
-		System.out.println("query: " + query);
-		User user = querySender.executeUser(query);
-		System.out.println("user -> " + user.getName());
-		return user;
-	}
+    @Override
+    public User getUserByEmail(String email) {
+        String query = PathConstant.GET_USER + email;
+        LOGGER.info("query: " + query);
+        User user = querySender.executeUser(query);
+        System.out.println("user -> " + user.getName());
+        return user;
+    }
 }

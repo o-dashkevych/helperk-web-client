@@ -1,9 +1,5 @@
 package ua.nure.helperk.rest.myapi.controller.query;
 
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import ua.nure.helperk.rest.myapi.entity.Advert;
@@ -16,44 +12,33 @@ import java.util.List;
  */
 public class AdvertQuerySender extends QuerySender {
 
-	public List<Advert> executeAllAdverts(String... params) {
-		final List<Advert> adverts;
-		try {
-			String url = params[0];
 
-			DefaultHttpClient httpClient = new DefaultHttpClient();
-			ResponseHandler<String> res = new BasicResponseHandler();
-
-			HttpGet get = new HttpGet(url);
-
-			String response = httpClient.execute(get, res);
-			JSONArray result = new JSONArray(response);
-			adverts = new ArrayList<>(result.length());
-			result.forEach(o -> adverts.add(new Advert((JSONObject) o)));
-		} catch (Throwable t) {
-			throwable = t;
-			return new ArrayList<>(0);
-		}
-		return adverts;
-	}
+    public List<Advert> executeAllAdverts(String... params) {
+        setUpConnectionParams(params[0]);
+        final List<Advert> adverts = new ArrayList<>();
+        try {
+            JSONArray result = getJSONArrayResponse();
+            result.forEach(o -> adverts.add(new Advert((JSONObject) o)));
+        } catch (Throwable t) {
+            throwable = t;
+            return new ArrayList<>(0);
+        }
+        return adverts;
+    }
 
 
-	public Advert executeAdvert(String... params) {
-		Advert advert;
-		try {
-			String url = params[0];
-			DefaultHttpClient httpClient = new DefaultHttpClient();
-			ResponseHandler<String> res = new BasicResponseHandler();
-			HttpGet get = new HttpGet(url);
-			String response = httpClient.execute(get, res);
-			JSONObject result = new JSONObject(response);
-			advert = new Advert(result);
-		} catch (Throwable t) {
-			advert = new Advert();
-			advert.setId(-1L);
-			throwable = t;
-		}
-		return advert;
-	}
+    public Advert executeAdvert(String... params) {
+        setUpConnectionParams(params[0]);
+        Advert advert;
+        try {
+            JSONObject result = getJSONObjectResponse();
+            advert = new Advert(result);
+        } catch (Throwable t) {
+            advert = new Advert();
+            advert.setId(-1L);
+            throwable = t;
+        }
+        return advert;
+    }
 
 }

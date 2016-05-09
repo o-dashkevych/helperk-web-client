@@ -10,9 +10,9 @@ import ua.nure.helperk.rest.myapi.entity.User;
 @RequestMapping("/")
 public class HomePageController {
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String loginPage(ModelMap model) {
-		model.addAttribute("user", new User());
-		return "index";
-	}
+    @RequestMapping(method = RequestMethod.GET)
+    public String loginPage(ModelMap model) {
+        model.addAttribute("user", new User());
+        return "index";
+    }
 }
