@@ -38,7 +38,8 @@ public class AuthController {
     @RequestMapping(method = RequestMethod.POST)
     public String loginUser(ModelMap model, @RequestParam(value = "email") String email,
                             @RequestParam(value = "password") String password, HttpServletRequest request) {
-        this.model = model;
+		user = new User();
+		this.model = model;
         page = "login";
         buildUser(email, password);
         if (!isExist(request)) {

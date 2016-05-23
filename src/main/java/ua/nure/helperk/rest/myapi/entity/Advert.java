@@ -32,22 +32,13 @@ public class Advert {
 
     private AdvertType type;
 
-    //TODO end date
     public Advert(JSONObject jsonObject) {
         this.id = jsonObject.getLong("id");
         this.titleName = jsonObject.getString("titleName");
         this.description = jsonObject.getString("description");
         this.startDate = new Timestamp(jsonObject.getLong("startDate"));
-//		this.endDate = new Timestamp(jsonObject.getLong("endDate"));
         this.price = jsonObject.getDouble("price");
         this.creator = new User((JSONObject) jsonObject.get("creator"));
-//		this.executor = new User((JSONObject) jsonObject.get("executor"));
         this.type = new AdvertType((JSONObject) jsonObject.get("type"));
-//		String getBackEncodedString = jsonObject.getString("image");
-//		if(getBackEncodedString == null){
-//			image = null;
-//		}else {
-//			image = new String(org.apache.commons.codec.binary.Base64.decodeBase64(getBackEncodedString));
-//		}
     }
 }

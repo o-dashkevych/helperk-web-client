@@ -48,7 +48,6 @@ public class DefaultAdvertController implements AdvertController {
                 PathConstant.AMPERSAND + PathConstant.ADVERT_TITLE + advert.getTitleName() +
                 PathConstant.AMPERSAND + PathConstant.ADVERT_DESC + advert.getDescription() +
                 PathConstant.AMPERSAND + PathConstant.ADVERT_START_DATE + advert.getStartDate().getTime() +
-//				PathConstant.AMPERSAND + PathConstant.ADVERT_END_DATE + advert.getEndDate() +
                 PathConstant.AMPERSAND + PathConstant.ADVERT_PRICE + advert.getPrice() +
                 PathConstant.AMPERSAND + PathConstant.ADVERT_ADVERT_TYPE + advert.getType().getName();
         return query.replaceAll(" ", "%20");

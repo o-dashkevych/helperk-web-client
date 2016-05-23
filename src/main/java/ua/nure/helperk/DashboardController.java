@@ -88,7 +88,6 @@ public class DashboardController {
     public String addAdvert(ModelMap model,
                             @RequestParam(value = "title") String title,
                             @RequestParam(value = "description") String description,
-//							@RequestParam(value = "endDate") Long endDate,
                             @RequestParam(value = "type") String type,
                             @RequestParam(value = "price") Double price, HttpSession session) {
         setControllerProperties(session, model);
@@ -105,7 +104,6 @@ public class DashboardController {
         advert.setTitleName(title);
         advert.setDescription(description);
         advert.setStartDate(new Timestamp(System.currentTimeMillis()));
-//		advert.setEndDate(new TiendDatemestamp());
         advert.setPrice(price);
         advert.setType(advertTypeController.getAdvertTypeByName(type));
         modelMap.addAttribute("advert", advert);

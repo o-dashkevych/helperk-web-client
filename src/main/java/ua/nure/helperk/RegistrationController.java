@@ -61,5 +61,4 @@ public class RegistrationController {
         model.addAttribute("user", new User());
         return "register";
     }
-
 }
